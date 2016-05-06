@@ -1,0 +1,4 @@
+language: objective-c
+xcode_project: Bamboo.xcodeproj
+xcode_scheme: Bamboo
+osx_image: xcode7.3
