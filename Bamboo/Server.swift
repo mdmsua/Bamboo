@@ -10,29 +10,34 @@ import Foundation
 
 class Server: NSObject, NSCoding {
     
-    let Location: String
+    let name: String
     
-    let Username: String
+    let location: String
     
-    let Password: String
+    let username: String
     
-    init(Location: String, Username: String, Password: String) {
-        self.Location = Location
-        self.Username = Username
-        self.Password = Password
+    let password: String
+    
+    init(name: String, location: String, username: String, password: String) {
+        self.name = name
+        self.location = location
+        self.username = username
+        self.password = password
     }
     
     required convenience init(coder aDecoder: NSCoder) {
+        let name = aDecoder.decodeObjectForKey("name") as! String
         let location = aDecoder.decodeObjectForKey("location") as! String
         let username = aDecoder.decodeObjectForKey("username") as! String
         let password = aDecoder.decodeObjectForKey("password") as! String
-        self.init(Location: location, Username: username, Password: password)
+        self.init(name: name, location: location, username: username, password: password)
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(Location, forKey: "location")
-        aCoder.encodeObject(Username, forKey: "username")
-        aCoder.encodeObject(Password, forKey: "password")
+        aCoder.encodeObject(name, forKey: "name")
+        aCoder.encodeObject(location, forKey: "location")
+        aCoder.encodeObject(username, forKey: "username")
+        aCoder.encodeObject(password, forKey: "password")
     }
     
 }

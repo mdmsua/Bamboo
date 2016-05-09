@@ -10,7 +10,11 @@ import UIKit
 
 class ServerViewController: UITableViewController {
     
+    private let repository = ServerRepository()
+    
     @IBOutlet private weak var doneButton: UIButton!
+    
+    @IBOutlet private weak var nameTextField: UITextField!
     
     @IBOutlet private weak var locationTextField: UITextField!
     
@@ -20,12 +24,14 @@ class ServerViewController: UITableViewController {
     
     @IBAction private func textFieldEditingChanged() {
         doneButton.enabled =
+            self.nameTextField.text?.characters.count > 0 &&
             self.locationTextField.text?.characters.count > 0 &&
             self.usernameTextField.text?.characters.count > 0 &&
             self.passwordTextField.text?.characters.count > 0
     }
 
     @IBAction func doneButtonClicked(sender: AnyObject) {
+        let name = self.nameTextField.text!
         let location = self.locationTextField.text!
         let username = self.usernameTextField.text!
         let password = self.passwordTextField.text!
@@ -39,16 +45,8 @@ class ServerViewController: UITableViewController {
                 if let error = error {
                     self.alert(error)
                 } else if let _ = info {
-                    let server = Server(Location: location, Username: username, Password: password)
-                    let userDefaults = NSUserDefaults.standardUserDefaults()
-                    var servers = [Server]()
-                    if let decoded = userDefaults.objectForKey("servers") as? NSData {
-                        servers = NSKeyedUnarchiver.unarchiveObjectWithData(decoded) as! [Server]
-                    }
-                    servers.append(server)
-                    let encoded = NSKeyedArchiver.archivedDataWithRootObject(servers)
-                    userDefaults.setObject(encoded, forKey: "servers")
-                    userDefaults.synchronize()
+                    let server = Server(name: name, location: location, username: username, password: password)
+                    self.repository.add(server)
                     self.navigationController?.popViewControllerAnimated(true)
                 }
             }

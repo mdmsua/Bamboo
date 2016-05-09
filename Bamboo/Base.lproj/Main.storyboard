@@ -58,10 +58,32 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
+                            <tableViewSection headerTitle="Name" id="B7a-vn-KQb">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bfd-gF-gyC">
+                                        <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bfd-gF-gyC" id="vVH-p1-bbe">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ybb-cX-Wqt">
+                                                    <rect key="frame" x="8" y="0.0" width="584" height="43.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                                    <connections>
+                                                        <action selector="textFieldEditingChanged" destination="sSE-tz-SLz" eventType="editingChanged" id="h0o-sF-9Fz"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="Location" id="N0I-X0-3G7">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Auz-aC-ajP">
-                                        <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="207.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Auz-aC-ajP" id="Soz-24-Vte">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -70,7 +92,7 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="https://bamboo:8085" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S8p-a9-3r7">
                                                     <rect key="frame" x="8" y="0.0" width="584" height="43.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="URL"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL"/>
                                                     <connections>
                                                         <action selector="textFieldEditingChanged" destination="sSE-tz-SLz" eventType="editingChanged" id="TF2-Ur-5fe"/>
                                                     </connections>
@@ -83,7 +105,7 @@
                             <tableViewSection headerTitle="Username" id="bZ3-44-ccf">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="iKx-f3-2J0">
-                                        <rect key="frame" x="0.0" y="207.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="301.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iKx-f3-2J0" id="2w4-1f-wjk">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -105,7 +127,7 @@
                             <tableViewSection headerTitle="Password" id="JoP-JD-FhK">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="PSG-vg-XbI">
-                                        <rect key="frame" x="0.0" y="301.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="395.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PSG-vg-XbI" id="3iM-j4-taP">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -127,7 +149,7 @@
                             <tableViewSection id="7jA-nZ-dKL">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="SD1-Ei-DQ6">
-                                        <rect key="frame" x="0.0" y="381.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="475.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SD1-Ei-DQ6" id="bMH-Ph-HkK">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -159,6 +181,7 @@
                     <connections>
                         <outlet property="doneButton" destination="wPx-U0-Od5" id="GfL-ER-MTp"/>
                         <outlet property="locationTextField" destination="S8p-a9-3r7" id="2Vk-Lf-SPA"/>
+                        <outlet property="nameTextField" destination="ybb-cX-Wqt" id="F5c-LM-TYk"/>
                         <outlet property="passwordTextField" destination="7kG-VD-eSR" id="KFE-Rr-fUE"/>
                         <outlet property="usernameTextField" destination="C6S-Vs-5Cr" id="Xek-af-JyM"/>
                     </connections>

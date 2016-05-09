@@ -16,6 +16,7 @@
 		14988BA01CDD3C0F00E34D39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14988B9F1CDD3C0F00E34D39 /* Assets.xcassets */; };
 		14988BA31CDD3C0F00E34D39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14988BA11CDD3C0F00E34D39 /* LaunchScreen.storyboard */; };
 		14988BAB1CDD465A00E34D39 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14988BAA1CDD465A00E34D39 /* Server.swift */; };
+		14CB363B1CE1152C00703E22 /* ServerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CB363A1CE1152C00703E22 /* ServerRepository.swift */; };
 		14DA193D1CDDEC6B0008F4B3 /* ServerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DA193C1CDDEC6B0008F4B3 /* ServerViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		14988BA21CDD3C0F00E34D39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		14988BA41CDD3C0F00E34D39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14988BAA1CDD465A00E34D39 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		14CB363A1CE1152C00703E22 /* ServerRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerRepository.swift; sourceTree = "<group>"; };
 		14DA193C1CDDEC6B0008F4B3 /* ServerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,6 +77,7 @@
 				14DA193C1CDDEC6B0008F4B3 /* ServerViewController.swift */,
 				147802B41CDFB74600F34796 /* Info.swift */,
 				147802B61CDFE49500F34796 /* UIViewControllerExtensions.swift */,
+				14CB363A1CE1152C00703E22 /* ServerRepository.swift */,
 			);
 			path = Bamboo;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14CB363B1CE1152C00703E22 /* ServerRepository.swift in Sources */,
 				14988B9B1CDD3C0F00E34D39 /* ViewController.swift in Sources */,
 				14988BAB1CDD465A00E34D39 /* Server.swift in Sources */,
 				14988B991CDD3C0F00E34D39 /* AppDelegate.swift in Sources */,

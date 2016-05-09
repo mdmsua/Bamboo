@@ -10,16 +10,19 @@ import UIKit
 
 class ViewController: UITableViewController {
 
+    private let repository = ServerRepository()
+    
     private var servers = [Server]()
     
-    private let userDefaults = NSUserDefaults.standardUserDefaults()
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.servers = self.repository.load()
+        self.tableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let decoded = self.userDefaults.objectForKey("servers") as? NSData {
-            servers = NSKeyedUnarchiver.unarchiveObjectWithData(decoded) as! [Server]
-            self.tableView.reloadData()
-        }
+        self.navigationItem.leftBarButtonItem = editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,12 +37,24 @@ class ViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let server = self.servers[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier("server")! as UITableViewCell
-        cell.textLabel?.text = server.Location
+        cell.textLabel?.text = server.name
         return cell
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            self.servers.removeAtIndex(indexPath.row)
+            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            self.repository.save(self.servers)
+        }
     }
 }
 
