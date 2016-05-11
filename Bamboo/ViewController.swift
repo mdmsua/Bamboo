@@ -19,11 +19,6 @@ class ViewController: UITableViewController {
         self.servers = self.repository.load()
         self.tableView.reloadData()
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.navigationItem.leftBarButtonItem = editButtonItem()
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -54,6 +49,16 @@ class ViewController: UITableViewController {
             self.servers.removeAtIndex(indexPath.row)
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             self.repository.save(self.servers)
+        }
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "tabBar" {
+            let cell = sender as! UITableViewCell
+            let indexPath = self.tableView.indexPathForCell(cell)
+            let index = indexPath?.row
+            let server = self.servers[index!]
+            self.repository.set(server)
         }
     }
 }

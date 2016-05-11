@@ -18,6 +18,7 @@ class RestClient {
     
     private enum Path {
         case Info
+        case Result
     }
     
     private enum Verb: String {
@@ -27,7 +28,7 @@ class RestClient {
         case Delete = "DELETE"
     }
     
-    private let paths: [Path: String] = [.Info: "info"]
+    private let paths: [Path: String] = [.Info: "info", .Result: "result"]
     
     init(_ host: NSURL, username: String, password: String) {
         self.host = NSURL(string: "/rest/api/latest/", relativeToURL: host)!
@@ -84,7 +85,26 @@ class RestClient {
                 handler(error: error, info: nil)
             }
         });
-        
+    }
+    
+    func result(handler: (error: NSError?, results: [Result]?) -> Void) -> Void {
+        let request = self.createRequest(.Get, path: paths[.Result]!)
+        self.makeRequest(request, handler: {
+            (error, data) -> Void in
+            if error == nil {
+                if let resultsJson = data!["results"]!["result"] as? [NSObject] {
+                    let results = resultsJson.map() {
+                        item -> Result in
+                        return Result(item as! [NSObject : AnyObject])!
+                    }
+                    handler(error: nil, results: results)
+                } else {
+                    handler(error: nil, results: nil)
+                }
+            } else {
+                handler(error: error, results: nil)
+            }
+        });
     }
     
 }

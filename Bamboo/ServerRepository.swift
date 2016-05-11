@@ -12,10 +12,12 @@ class ServerRepository {
     
     private let userDefaults = NSUserDefaults.standardUserDefaults()
     
-    private let key = "servers"
+    private let all = "servers"
+    
+    private let one = "server"
     
     func load() -> [Server] {
-        if let decoded = self.userDefaults.objectForKey(key) as? NSData {
+        if let decoded = self.userDefaults.objectForKey(all) as? NSData {
             if let servers = NSKeyedUnarchiver.unarchiveObjectWithData(decoded) as? [Server] {
                 return servers
             }
@@ -25,7 +27,22 @@ class ServerRepository {
     
     func save(servers: [Server]) {
         let encoded = NSKeyedArchiver.archivedDataWithRootObject(servers)
-        userDefaults.setObject(encoded, forKey: key)
+        userDefaults.setObject(encoded, forKey: all)
+        userDefaults.synchronize()
+    }
+    
+    func get() -> Server? {
+        if let decoded = self.userDefaults.objectForKey(one) as? NSData {
+            if let server = NSKeyedUnarchiver.unarchiveObjectWithData(decoded) as? Server {
+                return server
+            }
+        }
+        return nil
+    }
+    
+    func set(server: Server) {
+        let encoded = NSKeyedArchiver.archivedDataWithRootObject(server)
+        userDefaults.setObject(encoded, forKey: one)
         userDefaults.synchronize()
     }
     
