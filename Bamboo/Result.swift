@@ -31,10 +31,18 @@ class Result {
         guard let state = json["state"] as? String else {
             return nil
         }
+        if let plan = Plan(plan) {
+            self.plan = plan
+        } else {
+            return nil
+        }
+        if let state = State(rawValue: state) {
+            self.state = state
+        } else {
+            return nil
+        }
         self.key = key
         self.id = id
-        self.plan = Plan(plan)!
-        self.state = State(rawValue: state)!
     }
     
 }

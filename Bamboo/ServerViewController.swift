@@ -30,13 +30,13 @@ class ServerViewController: UITableViewController {
             self.passwordTextField.text?.characters.count > 0
     }
 
-    @IBAction func doneButtonClicked(sender: AnyObject) {
+    @IBAction private func doneButtonClicked(sender: AnyObject) {
         let name = self.nameTextField.text!
         let location = self.locationTextField.text!
         let username = self.usernameTextField.text!
         let password = self.passwordTextField.text!
         let url = NSURL(string: location)!
-        let client = RestClient(url, username: username, password: password)
+        let client = BambooClient(url, username: username, password: password)
         let overlay = self.presentActivityIndicatorOverlay()
         client.info() {
             (error, info) -> Void in

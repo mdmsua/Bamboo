@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		140F8DF51CE2937E00B0CBCE /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140F8DF41CE2937E00B0CBCE /* Plan.swift */; };
 		140F8DF71CE2948200B0CBCE /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140F8DF61CE2948200B0CBCE /* Result.swift */; };
-		147802B01CDFB5AD00F34796 /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147802AF1CDFB5AD00F34796 /* RestClient.swift */; };
+		147802B01CDFB5AD00F34796 /* BambooClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147802AF1CDFB5AD00F34796 /* BambooClient.swift */; };
 		147802B51CDFB74600F34796 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147802B41CDFB74600F34796 /* Info.swift */; };
 		147802B71CDFE49500F34796 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147802B61CDFE49500F34796 /* UIViewControllerExtensions.swift */; };
 		14988B991CDD3C0F00E34D39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14988B981CDD3C0F00E34D39 /* AppDelegate.swift */; };
@@ -26,7 +26,7 @@
 /* Begin PBXFileReference section */
 		140F8DF41CE2937E00B0CBCE /* Plan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
 		140F8DF61CE2948200B0CBCE /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
-		147802AF1CDFB5AD00F34796 /* RestClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestClient.swift; sourceTree = "<group>"; };
+		147802AF1CDFB5AD00F34796 /* BambooClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BambooClient.swift; sourceTree = "<group>"; };
 		147802B41CDFB74600F34796 /* Info.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		147802B61CDFE49500F34796 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		14988B951CDD3C0F00E34D39 /* Bamboo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bamboo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,10 +56,41 @@
 		140F8DF31CE2937100B0CBCE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				147802B41CDFB74600F34796 /* Info.swift */,
+				14988BAA1CDD465A00E34D39 /* Server.swift */,
 				140F8DF41CE2937E00B0CBCE /* Plan.swift */,
 				140F8DF61CE2948200B0CBCE /* Result.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		144F523B1CE3BE9B007B1652 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				14988BA11CDD3C0F00E34D39 /* LaunchScreen.storyboard */,
+				14988B9C1CDD3C0F00E34D39 /* Main.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		144F523C1CE3BFB1007B1652 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				14988B9A1CDD3C0F00E34D39 /* ViewController.swift */,
+				14DA193C1CDDEC6B0008F4B3 /* ServerViewController.swift */,
+				147802B61CDFE49500F34796 /* UIViewControllerExtensions.swift */,
+				14CB363C1CE1357A00703E22 /* DashboardViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		144F523D1CE3BFD5007B1652 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				147802AF1CDFB5AD00F34796 /* BambooClient.swift */,
+				14CB363A1CE1152C00703E22 /* ServerRepository.swift */,
+			);
+			name = Repositories;
 			sourceTree = "<group>";
 		};
 		14988B8C1CDD3C0F00E34D39 = {
@@ -81,20 +112,13 @@
 		14988B971CDD3C0F00E34D39 /* Bamboo */ = {
 			isa = PBXGroup;
 			children = (
+				144F523D1CE3BFD5007B1652 /* Repositories */,
+				144F523C1CE3BFB1007B1652 /* Controllers */,
+				144F523B1CE3BE9B007B1652 /* Views */,
 				140F8DF31CE2937100B0CBCE /* Models */,
-				147802AF1CDFB5AD00F34796 /* RestClient.swift */,
 				14988B981CDD3C0F00E34D39 /* AppDelegate.swift */,
-				14988B9A1CDD3C0F00E34D39 /* ViewController.swift */,
-				14988B9C1CDD3C0F00E34D39 /* Main.storyboard */,
 				14988B9F1CDD3C0F00E34D39 /* Assets.xcassets */,
-				14988BA11CDD3C0F00E34D39 /* LaunchScreen.storyboard */,
 				14988BA41CDD3C0F00E34D39 /* Info.plist */,
-				14988BAA1CDD465A00E34D39 /* Server.swift */,
-				14DA193C1CDDEC6B0008F4B3 /* ServerViewController.swift */,
-				147802B41CDFB74600F34796 /* Info.swift */,
-				147802B61CDFE49500F34796 /* UIViewControllerExtensions.swift */,
-				14CB363A1CE1152C00703E22 /* ServerRepository.swift */,
-				14CB363C1CE1357A00703E22 /* DashboardViewController.swift */,
 			);
 			path = Bamboo;
 			sourceTree = "<group>";
@@ -177,7 +201,7 @@
 				147802B51CDFB74600F34796 /* Info.swift in Sources */,
 				14CB363D1CE1357A00703E22 /* DashboardViewController.swift in Sources */,
 				140F8DF51CE2937E00B0CBCE /* Plan.swift in Sources */,
-				147802B01CDFB5AD00F34796 /* RestClient.swift in Sources */,
+				147802B01CDFB5AD00F34796 /* BambooClient.swift in Sources */,
 				14DA193D1CDDEC6B0008F4B3 /* ServerViewController.swift in Sources */,
 				147802B71CDFE49500F34796 /* UIViewControllerExtensions.swift in Sources */,
 				140F8DF71CE2948200B0CBCE /* Result.swift in Sources */,

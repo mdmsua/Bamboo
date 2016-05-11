@@ -1,5 +1,5 @@
 //
-//  RestClient.swift
+//  BambooClient.swift
 //  Bamboo
 //
 //  Created by Dmytro Morozov on 08.05.16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class RestClient {
+class BambooClient {
     
     private let host: NSURL
     
@@ -48,7 +48,7 @@ class RestClient {
         return request
     }
     
-    private func makeRequest(request: NSMutableURLRequest, handler: (error: NSError?, data: [NSObject: AnyObject]?) -> Void) {
+    private func executeRequest(request: NSMutableURLRequest, handler: (error: NSError?, data: [NSObject: AnyObject]?) -> Void) {
         let session = NSURLSession.sharedSession()
         session.dataTaskWithRequest(request, completionHandler: {
             (data, response, error) -> Void in
@@ -73,7 +73,7 @@ class RestClient {
     
     func info(handler: (error: NSError?, info: Info?) -> Void) -> Void {
         let request = self.createRequest(.Get, path: paths[.Info]!)
-        self.makeRequest(request, handler: {
+        self.executeRequest(request, handler: {
             (error, data) -> Void in
             if error == nil {
                 if let info = Info(data!) {
@@ -89,22 +89,26 @@ class RestClient {
     
     func result(handler: (error: NSError?, results: [Result]?) -> Void) -> Void {
         let request = self.createRequest(.Get, path: paths[.Result]!)
-        self.makeRequest(request, handler: {
+        self.executeRequest(request) {
             (error, data) -> Void in
-            if error == nil {
-                if let resultsJson = data!["results"]!["result"] as? [NSObject] {
-                    let results = resultsJson.map() {
-                        item -> Result in
-                        return Result(item as! [NSObject : AnyObject])!
-                    }
-                    handler(error: nil, results: results)
-                } else {
-                    handler(error: nil, results: nil)
-                }
-            } else {
+            if let error = error {
                 handler(error: error, results: nil)
             }
-        });
+            else if let data = data {
+                if data["results"] is NSObject && data["results"]!["result"] is [NSObject] {
+                    let resultsJson = data["results"]!["result"] as! [NSObject]
+                    var results = [Result]()
+                    for resultJson in resultsJson {
+                        if let itemJson = resultJson as? [NSObject: AnyObject] {
+                            if let result = Result(itemJson) {
+                                results.append(result)
+                            }
+                        }
+                    }
+                    handler(error: nil, results: results)
+                }
+            }
+        };
     }
     
 }
