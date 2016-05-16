@@ -93,6 +93,13 @@
 			name = Repositories;
 			sourceTree = "<group>";
 		};
+		1474E02D1CEA080900FDE1D5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		14988B8C1CDD3C0F00E34D39 = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +119,7 @@
 		14988B971CDD3C0F00E34D39 /* Bamboo */ = {
 			isa = PBXGroup;
 			children = (
+				1474E02D1CEA080900FDE1D5 /* Extensions */,
 				144F523D1CE3BFD5007B1652 /* Repositories */,
 				144F523C1CE3BFB1007B1652 /* Controllers */,
 				144F523B1CE3BE9B007B1652 /* Views */,
@@ -155,6 +163,7 @@
 				TargetAttributes = {
 					14988B941CDD3C0F00E34D39 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 56468X2PU5;
 					};
 				};
 			};
@@ -317,6 +326,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Bamboo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mdmsua.Bamboo;
@@ -328,6 +338,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Bamboo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mdmsua.Bamboo;

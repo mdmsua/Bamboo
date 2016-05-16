@@ -14,7 +14,13 @@ class DashboardViewController: UITableViewController {
     
     var client: BambooClient?
     
-    var results = [Result]()
+    var results = [String: [Result]]()
+    
+    var plans: [String] {
+        get {
+            return self.results.map() { $0.0 }
+        }
+    }
     
     private let repository = ServerRepository()
     
@@ -32,16 +38,33 @@ class DashboardViewController: UITableViewController {
                 if let error = error {
                     self.alert(error)
                 } else if let results = results {
-                    self.results = results
                     let failed = results.filter() { element -> Bool in element.state == .Failed }.count
                     if failed > 0 {
                         self.tabBarItem.badgeValue = String(failed)
                     }
+                    self.results = self.groupByPlan(results)
                     self.tableView.reloadData()
                 }
             }
         }
         sender.endRefreshing()
+    }
+    
+    private func groupByPlan(array: [Result]) -> [String: [Result]] {
+        var dictionary = [String: [Result]]()
+        for element in array {
+            let key = element.plan.shortName
+            var array: [Result]? = dictionary[key]
+            
+            if (array == nil) {
+                array = [Result]()
+            }
+            
+            array!.append(element)
+            dictionary[key] = array!
+        }
+        
+        return dictionary
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -50,15 +73,25 @@ class DashboardViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.results.count
+        let plan = self.plans[section]
+        return self.results[plan]?.count ?? 0
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("result")!
-        let result = self.results[indexPath.row]
-        cell.textLabel?.text = result.plan.name
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("cell")!
+        let plan = self.plans[indexPath.section]
+        let result = self.results[plan]![indexPath.row]
+        cell.textLabel?.text = result.plan.shortName
         cell.detailTextLabel?.text = result.key
         cell.imageView?.image = UIImage(named: result.state.rawValue)
         return cell
+    }
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return self.results.count
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return self.plans[section]
     }
 }

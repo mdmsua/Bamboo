@@ -14,6 +14,10 @@ class Plan {
     
     let name: String
     
+    let shortKey: String
+    
+    let shortName: String
+    
     init?(_ json: [NSObject: AnyObject]) {
         guard let key = json["key"] as? String else {
             return nil
@@ -21,8 +25,16 @@ class Plan {
         guard let name = json["name"] as? String else {
             return nil
         }
+        guard let shortKey = json["shortKey"] as? String else {
+            return nil
+        }
+        guard let shortName = json["shortName"] as? String else {
+            return nil
+        }
         self.key = key
         self.name = name
+        self.shortKey = shortKey
+        self.shortName = shortName
     }
     
 }

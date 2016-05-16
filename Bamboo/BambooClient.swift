@@ -28,7 +28,7 @@ class BambooClient {
         case Delete = "DELETE"
     }
     
-    private let paths: [Path: String] = [.Info: "info", .Result: "result"]
+    private let paths: [Path: String] = [.Info: "info", .Result: "result?max-result=100"]
     
     init(_ host: NSURL, username: String, password: String) {
         self.host = NSURL(string: "/rest/api/latest/", relativeToURL: host)!
