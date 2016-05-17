@@ -14,13 +14,7 @@ class DashboardViewController: UITableViewController {
     
     var client: BambooClient?
     
-    var results = [String: [Result]]()
-    
-    var plans: [String] {
-        get {
-            return self.results.map() { $0.0 }
-        }
-    }
+    var results = [Result]()
     
     private let repository = ServerRepository()
     
@@ -42,7 +36,7 @@ class DashboardViewController: UITableViewController {
                     if failed > 0 {
                         self.tabBarItem.badgeValue = String(failed)
                     }
-                    self.results = self.groupByPlan(results)
+                    self.results = results
                     self.tableView.reloadData()
                 }
             }
@@ -72,26 +66,16 @@ class DashboardViewController: UITableViewController {
         self.refresh(self.refreshControl!)
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let plan = self.plans[section]
-        return self.results[plan]?.count ?? 0
-    }
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("cell")!
-        let plan = self.plans[indexPath.section]
-        let result = self.results[plan]![indexPath.row]
+        let result = self.results[indexPath.row]
         cell.textLabel?.text = result.plan.shortName
         cell.detailTextLabel?.text = result.key
         cell.imageView?.image = UIImage(named: result.state.rawValue)
         return cell
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.results.count
-    }
-    
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self.plans[section]
     }
 }
