@@ -44,14 +44,6 @@ class ViewController: UITableViewController {
         return true
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            self.servers.removeAtIndex(indexPath.row)
-            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            self.repository.save(self.servers)
-        }
-    }
-
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "tabBar" {
             let cell = sender as! UITableViewCell
@@ -60,6 +52,22 @@ class ViewController: UITableViewController {
             let server = self.servers[index!]
             self.repository.set(server)
         }
+    }
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let update = UITableViewRowAction(style: .Normal, title: "Update", handler: self.update)
+        let delete = UITableViewRowAction(style: .Default, title: "Delete", handler: self.delete)
+        return [delete, update]
+    }
+    
+    private func update(action: UITableViewRowAction, indexPath: NSIndexPath) {
+        
+    }
+    
+    private func delete(action: UITableViewRowAction, indexPath: NSIndexPath) {
+        self.servers.removeAtIndex(indexPath.row)
+        self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        self.repository.save(self.servers)
     }
 }
 

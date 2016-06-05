@@ -12,7 +12,7 @@ class ServerViewController: UITableViewController {
     
     private let repository = ServerRepository()
     
-    @IBOutlet private weak var doneButton: UIButton!
+    @IBOutlet private weak var doneButton: UIBarButtonItem!
     
     @IBOutlet private weak var nameTextField: UITextField!
     

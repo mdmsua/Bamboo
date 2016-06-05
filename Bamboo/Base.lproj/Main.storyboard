@@ -214,40 +214,21 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="7jA-nZ-dKL">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="SD1-Ei-DQ6">
-                                        <rect key="frame" x="0.0" y="475.5" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SD1-Ei-DQ6" id="bMH-Ph-HkK">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wPx-U0-Od5">
-                                                    <rect key="frame" x="216" y="7" width="168" height="30"/>
-                                                    <state key="normal" title="Check and save settings"/>
-                                                    <connections>
-                                                        <action selector="doneButtonClicked:" destination="sSE-tz-SLz" eventType="primaryActionTriggered" id="BHB-kG-bql"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="wPx-U0-Od5" firstAttribute="centerX" secondItem="bMH-Ph-HkK" secondAttribute="centerX" id="DNE-cF-7th"/>
-                                                <constraint firstItem="wPx-U0-Od5" firstAttribute="centerY" secondItem="bMH-Ph-HkK" secondAttribute="centerY" id="Fy9-el-UxV"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="sSE-tz-SLz" id="l8j-QN-uwr"/>
                             <outlet property="delegate" destination="sSE-tz-SLz" id="upb-ly-bbw"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Server" id="iPb-nk-w8X"/>
+                    <navigationItem key="navigationItem" title="Server" id="iPb-nk-w8X">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="save" id="Rzr-Tt-jMC">
+                            <connections>
+                                <action selector="doneButtonClicked:" destination="sSE-tz-SLz" id="DNH-D1-7fq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="doneButton" destination="wPx-U0-Od5" id="GfL-ER-MTp"/>
+                        <outlet property="doneButton" destination="Rzr-Tt-jMC" id="YYU-cH-NyN"/>
                         <outlet property="locationTextField" destination="S8p-a9-3r7" id="2Vk-Lf-SPA"/>
                         <outlet property="nameTextField" destination="ybb-cX-Wqt" id="F5c-LM-TYk"/>
                         <outlet property="passwordTextField" destination="7kG-VD-eSR" id="KFE-Rr-fUE"/>
