@@ -18,6 +18,7 @@ class ViewController: UITableViewController {
         super.viewDidAppear(animated)
         self.servers = self.repository.load()
         self.tableView.reloadData()
+        self.navigationItem.leftBarButtonItem = editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,29 +46,25 @@ class ViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let cell = sender as! UITableViewCell
+        let indexPath = self.tableView.indexPathForCell(cell)
+        let index = indexPath?.row
+        let server = self.servers[index!]
         if segue.identifier == "tabBar" {
-            let cell = sender as! UITableViewCell
-            let indexPath = self.tableView.indexPathForCell(cell)
-            let index = indexPath?.row
-            let server = self.servers[index!]
+            self.repository.set(server)
+        } else if segue.identifier == "create" {
+            self.repository.set(nil)
+        } else if segue.identifier == "update" {
             self.repository.set(server)
         }
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let update = UITableViewRowAction(style: .Normal, title: "Update", handler: self.update)
-        let delete = UITableViewRowAction(style: .Default, title: "Delete", handler: self.delete)
-        return [delete, update]
-    }
-    
-    private func update(action: UITableViewRowAction, indexPath: NSIndexPath) {
-        
-    }
-    
-    private func delete(action: UITableViewRowAction, indexPath: NSIndexPath) {
-        self.servers.removeAtIndex(indexPath.row)
-        self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        self.repository.save(self.servers)
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            self.servers.removeAtIndex(indexPath.row)
+            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            self.repository.save(self.servers)
+        }
     }
 }
 

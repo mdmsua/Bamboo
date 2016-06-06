@@ -14,7 +14,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="server" textLabel="hek-Ky-3Vd" style="IBUITableViewCellStyleDefault" id="MaP-S3-HxR">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="server" editingAccessoryType="detailDisclosureButton" textLabel="hek-Ky-3Vd" style="IBUITableViewCellStyleDefault" id="MaP-S3-HxR">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MaP-S3-HxR" id="F65-Zz-P3X">
@@ -31,7 +31,8 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="uWW-tB-VdE" kind="show" identifier="tabBar" id="uDA-Ku-y75"/>
+                                    <segue destination="uWW-tB-VdE" kind="show" identifier="tabBar" id="4yC-HJ-Rhl"/>
+                                    <segue destination="Vc5-NI-QQw" kind="showDetail" identifier="update" trigger="accessoryAction" id="r4X-kB-b7i"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -43,7 +44,7 @@
                     <navigationItem key="navigationItem" title="Servers" id="uTk-ay-np6">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="3a9-Oc-kbW">
                             <connections>
-                                <segue destination="sSE-tz-SLz" kind="show" id="lbA-Vw-wCa"/>
+                                <segue destination="Vc5-NI-QQw" kind="showDetail" identifier="create" id="lbA-Vw-wCa"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -89,7 +90,7 @@
                                             <rect key="frame" x="15" y="12" width="31.5" height="19.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Yc9-ie-8aw">
@@ -138,7 +139,7 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ybb-cX-Wqt">
                                                     <rect key="frame" x="8" y="0.0" width="584" height="43.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     <connections>
                                                         <action selector="textFieldEditingChanged" destination="sSE-tz-SLz" eventType="editingChanged" id="h0o-sF-9Fz"/>
                                                     </connections>
@@ -221,23 +222,28 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Server" id="iPb-nk-w8X">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="e4n-Mr-Se2">
+                            <connections>
+                                <action selector="cancelBarButtonItemClicked:" destination="sSE-tz-SLz" id="BmA-eT-Lvd"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="save" id="Rzr-Tt-jMC">
                             <connections>
-                                <action selector="doneButtonClicked:" destination="sSE-tz-SLz" id="DNH-D1-7fq"/>
+                                <action selector="saveBarButtonItemClicked:" destination="sSE-tz-SLz" id="efM-ow-a4R"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="doneButton" destination="Rzr-Tt-jMC" id="YYU-cH-NyN"/>
                         <outlet property="locationTextField" destination="S8p-a9-3r7" id="2Vk-Lf-SPA"/>
                         <outlet property="nameTextField" destination="ybb-cX-Wqt" id="F5c-LM-TYk"/>
                         <outlet property="passwordTextField" destination="7kG-VD-eSR" id="KFE-Rr-fUE"/>
+                        <outlet property="saveBarButtonItem" destination="Rzr-Tt-jMC" id="cry-nO-462"/>
                         <outlet property="usernameTextField" destination="C6S-Vs-5Cr" id="Xek-af-JyM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W7u-hs-0On" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1025" y="1016"/>
+            <point key="canvasLocation" x="1764" y="1016"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="egA-pE-zl8">
@@ -257,8 +263,29 @@
             </objects>
             <point key="canvasLocation" x="213" y="249"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cqe-yX-7mS">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Vc5-NI-QQw" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9bP-44-LdD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="sSE-tz-SLz" kind="relationship" relationship="rootViewController" id="Ut3-hw-rVp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="REf-ps-BXP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1025" y="1016"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Dashboard" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="r4X-kB-b7i"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -40,16 +40,33 @@ class ServerRepository {
         return nil
     }
     
-    func set(server: Server) {
-        let encoded = NSKeyedArchiver.archivedDataWithRootObject(server)
-        userDefaults.setObject(encoded, forKey: one)
-        userDefaults.synchronize()
+    func set(server: Server?) {
+        defer {
+            userDefaults.synchronize()
+        }
+        if let server = server {
+            let encoded = NSKeyedArchiver.archivedDataWithRootObject(server)
+            userDefaults.setObject(encoded, forKey: one)
+        } else {
+            userDefaults.removeObjectForKey(one)
+        }
     }
     
     func add(server: Server) {
         var servers = self.load()
         servers.append(server)
         self.save(servers)
+    }
+    
+    func update(server: Server) {
+        var servers = self.load()
+        let index = servers.indexOf { s in s.location == server.location }
+        if let index = index {
+            servers[index] = server
+            self.save(servers)
+        } else {
+            self.add(server)
+        }
     }
     
 }
