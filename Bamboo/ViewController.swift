@@ -46,16 +46,17 @@ class ViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let cell = sender as! UITableViewCell
-        let indexPath = self.tableView.indexPathForCell(cell)
-        let index = indexPath?.row
-        let server = self.servers[index!]
-        if segue.identifier == "tabBar" {
-            self.repository.set(server)
-        } else if segue.identifier == "create" {
-            self.repository.set(nil)
-        } else if segue.identifier == "update" {
-            self.repository.set(server)
+        if let cell = sender as? UITableViewCell {
+            let indexPath = self.tableView.indexPathForCell(cell)
+            let index = indexPath?.row
+            let server = self.servers[index!]
+            if segue.identifier == "tabBar" {
+                self.repository.set(server)
+            } else if segue.identifier == "create" {
+                self.repository.set(nil)
+            } else if segue.identifier == "update" {
+                self.repository.set(server)
+            }
         }
     }
     
