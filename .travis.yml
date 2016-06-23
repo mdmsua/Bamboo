@@ -1,5 +1,8 @@
 language: objective-c
 xcode_project: Bamboo.xcodeproj
 xcode_scheme: Bamboo
-xcode_sdk: iphonesimulator
-env: ONLY_ACTIVE_ARCH=NO
+xcode_sdk: iphonesimulator9.3
+env: CODE_SIGNING_REQUIRED=NO
+before_install:
+  - brew update
+  - brew outdated xctool || brew upgrade xctool
