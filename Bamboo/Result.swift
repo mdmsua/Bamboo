@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Result {
+class Result: Parsable {
     
     let plan: Plan
     
@@ -18,7 +18,7 @@ class Result {
     
     let state: State
     
-    init?(_ json: [NSObject: AnyObject]) {
+    required init?(_ json: [String: AnyObject]) {
         guard let key = json["key"] as? String else {
             return nil
         }
