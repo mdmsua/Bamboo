@@ -22,6 +22,8 @@ class ServerViewController: UITableViewController {
     
     @IBOutlet private weak var passwordTextField: UITextField!
     
+    @IBOutlet private weak var biometricsSwitch: UISwitch!
+    
     @IBAction private func textFieldEditingChanged() {
         self.saveBarButtonItem.enabled =
             !self.nameTextField.text!.isEmpty &&
@@ -45,7 +47,7 @@ class ServerViewController: UITableViewController {
                 if let error = error {
                     self.alert(error)
                 } else if let _ = info {
-                    let server = Server(name: name, location: location, username: username, password: password)
+                    let server = Server(name: name, location: location, username: username, password: password, biometrics: self.biometricsSwitch.on)
                     self.repository.update(server)
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }
@@ -65,6 +67,7 @@ class ServerViewController: UITableViewController {
             self.locationTextField.text = server.location
             self.usernameTextField.text = server.username
             self.passwordTextField.text = server.password
+            self.biometricsSwitch.on = server.biometrics
             self.textFieldEditingChanged()
         }
     }
