@@ -49,8 +49,9 @@ class BambooClient {
     }
     
     private func executeRequest(request: NSMutableURLRequest, handler: (error: NSError?, data: [String: AnyObject]?) -> Void) {
-        let session = NSURLSession.sharedSession()
-        session.dataTaskWithRequest(request, completionHandler: {
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration.timeoutIntervalForRequest = 10
+        NSURLSession(configuration: configuration).dataTaskWithRequest(request, completionHandler: {
             (data, response, error) -> Void in
             if error == nil {
                 let response = response as! NSHTTPURLResponse

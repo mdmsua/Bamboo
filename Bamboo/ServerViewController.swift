@@ -25,24 +25,25 @@ class ServerViewController: UITableViewController {
     @IBOutlet private weak var biometricsSwitch: UISwitch!
     
     @IBAction private func textFieldEditingChanged() {
-        self.saveBarButtonItem.enabled =
-            !self.nameTextField.text!.isEmpty &&
-            !self.locationTextField.text!.isEmpty &&
-            !self.usernameTextField.text!.isEmpty &&
-            !self.passwordTextField.text!.isEmpty
+        saveBarButtonItem.enabled =
+            !nameTextField.text!.isEmpty &&
+            !locationTextField.text!.isEmpty &&
+            !usernameTextField.text!.isEmpty &&
+            !passwordTextField.text!.isEmpty
     }
 
     @IBAction private func saveBarButtonItemClicked(sender: AnyObject) {
-        let name = self.nameTextField.text!
-        let location = self.locationTextField.text!
-        let username = self.usernameTextField.text!
-        let password = self.passwordTextField.text!
+        let name = nameTextField.text!
+        let location = locationTextField.text!
+        let username = usernameTextField.text!
+        let password = passwordTextField.text!
         let url = NSURL(string: location)!
         let client = BambooClient(url, username: username, password: password)
-        let overlay = self.presentActivityIndicatorOverlay()
+        let overlay = presentActivityIndicatorOverlay()
         client.info() {
             (error, info) -> Void in
             dispatch_async(dispatch_get_main_queue()) {
+                [unowned self] in
                 overlay.removeFromSuperview()
                 if let error = error {
                     self.alert(error)
@@ -57,18 +58,18 @@ class ServerViewController: UITableViewController {
     }
     
     @IBAction private func cancelBarButtonItemClicked(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     internal override func viewDidLoad() {
         super.viewDidLoad()
-        if let server = self.repository.get() {
-            self.nameTextField.text = server.name
-            self.locationTextField.text = server.location
-            self.usernameTextField.text = server.username
-            self.passwordTextField.text = server.password
-            self.biometricsSwitch.on = server.biometrics
-            self.textFieldEditingChanged()
+        if let server = repository.get() {
+            nameTextField.text = server.name
+            locationTextField.text = server.location
+            usernameTextField.text = server.username
+            passwordTextField.text = server.password
+            biometricsSwitch.on = server.biometrics
+            textFieldEditingChanged()
         }
     }
 }

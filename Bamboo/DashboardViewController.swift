@@ -15,6 +15,8 @@ class DashboardViewController: UITableViewController, UISearchResultsUpdating {
     var client: BambooClient?
 
     private var page: Page<Result>?
+    
+    private var biometrics = Biometrics()
 
     private var results: [Result] = [Result]() {
         didSet {
@@ -63,8 +65,8 @@ class DashboardViewController: UITableViewController, UISearchResultsUpdating {
             title = server.name
             client = BambooClient(NSURL(string: (server.location))!, username: server.username, password: server.password)
             if server.biometrics {
-                if Biometrics.enabled {
-                    Biometrics.authenticate("Access \(server.name) as \(server.username)") {
+                if biometrics.enabled {
+                    biometrics.authenticate("Access \(server.name) as \(server.username)") {
                         [unowned self] result in
                         dispatch_async(dispatch_get_main_queue()) {
                             if result == .Success {
@@ -110,10 +112,12 @@ class DashboardViewController: UITableViewController, UISearchResultsUpdating {
         }
         let authorizeAction = UIAlertAction(title: "Authorize", style: .Default) {
             _ -> Void in
+            passwordAlert.dismissViewControllerAnimated(true, completion: nil)
             result(passwordAlert.textFields![0].text == server.password)
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) {
             _ -> Void in
+            passwordAlert.dismissViewControllerAnimated(true, completion: nil)
             result(false)
         }
         passwordAlert.addAction(authorizeAction)
