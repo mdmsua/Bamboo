@@ -30,7 +30,6 @@ class Biometrics {
         context.evaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, localizedReason: message) {
             (success, error) -> Void in
             if success {
-                print("Success")
                 handler(.Success)
             } else if let error = error, laError = LAError(rawValue: error.code) {
                 switch laError {

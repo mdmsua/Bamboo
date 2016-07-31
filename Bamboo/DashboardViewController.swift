@@ -18,25 +18,25 @@ class DashboardViewController: UITableViewController, UISearchResultsUpdating {
 
     private var results: [Result] = [Result]() {
         didSet {
-            let failed = self.results.filter() {
+            let failed = results.filter() {
                 element -> Bool in element.state == .Failed
             }.count
             if failed > 0 {
-                self.tabBarItem.badgeValue = String(failed)
+                tabBarItem.badgeValue = String(failed)
             }
-            self.tableView.reloadData()
+            tableView.reloadData()
         }
     }
 
     private var items: [Result] = [Result]() {
         didSet {
-            let failed = self.items.filter() {
+            let failed = items.filter() {
                 element -> Bool in element.state == .Failed
             }.count
             if failed > 0 {
-                self.tabBarItem.badgeValue = String(failed)
+                tabBarItem.badgeValue = String(failed)
             }
-            self.tableView.reloadData()
+            tableView.reloadData()
         }
     }
 
@@ -46,57 +46,58 @@ class DashboardViewController: UITableViewController, UISearchResultsUpdating {
 
     private var isSeachActive: Bool {
         get {
-            return self.searchController.active && !(self.searchController.searchBar.text?.isEmpty)!
+            return searchController.active && !(searchController.searchBar.text?.isEmpty)!
         }
-    }
-
-    private func loadDashboard() {
-        self.client = BambooClient(NSURL(string: (self.server?.location)!)!, username: (self.server?.username)!, password: (self.server?.password)!)
-        self.refreshControl?.addTarget(self, action: #selector(DashboardViewController.refresh(_:)), forControlEvents: .ValueChanged)
-        self.refreshControl?.beginRefreshing()
-        self.searchController.searchResultsUpdater = self
-        self.searchController.dimsBackgroundDuringPresentation = false
-        self.definesPresentationContext = true
-        self.tableView.tableHeaderView = self.searchController.searchBar
-        self.refresh(self.refreshControl!)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.server = self.repository.get()
-        if server!.biometrics {
-            if Biometrics.enabled {
-                Biometrics.authenticate("Please use Touch ID to access \(server!.name)") {
-                    result in
-                    if result == .Success {
-                        self.loadDashboard()
-                    } else if result == .Fallback {
-                        self.askPassword(self.server!) {
-                            result in
-                            if result {
+        tableView.tableHeaderView = searchController.searchBar
+        tableView.tableFooterView = UIView()
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        refreshControl?.addTarget(self, action: #selector(loadDashboard), forControlEvents: .ValueChanged)
+        definesPresentationContext = true
+        server = repository.get()
+        if let server = server {
+            title = server.name
+            client = BambooClient(NSURL(string: (server.location))!, username: server.username, password: server.password)
+            if server.biometrics {
+                if Biometrics.enabled {
+                    Biometrics.authenticate("Access \(server.name) as \(server.username)") {
+                        [unowned self] result in
+                        dispatch_async(dispatch_get_main_queue()) {
+                            if result == .Success {
                                 self.loadDashboard()
+                            } else if result == .Fallback {
+                                self.askPassword(self.server!) {
+                                    result in
+                                    if result {
+                                        self.loadDashboard()
+                                    } else {
+                                        self.navigationController?.popViewControllerAnimated(true)
+                                    }
+                                }
                             } else {
                                 self.navigationController?.popViewControllerAnimated(true)
                             }
                         }
-                    } else {
-                        dispatch_async(dispatch_get_main_queue()) {
+                    }
+                } else {
+                    askPassword(server) {
+                        [unowned self ]result in
+                        if result {
+                            self.loadDashboard()
+                        } else {
                             self.navigationController?.popViewControllerAnimated(true)
                         }
                     }
                 }
             } else {
-                self.askPassword(server!) {
-                    result in
-                    if result {
-                        self.loadDashboard()
-                    } else {
-                        self.navigationController?.popViewControllerAnimated(true)
-                    }
-                }
+                loadDashboard()
             }
         } else {
-            self.loadDashboard()
+            navigationController?.popViewControllerAnimated(true)
         }
     }
 
@@ -117,13 +118,12 @@ class DashboardViewController: UITableViewController, UISearchResultsUpdating {
         }
         passwordAlert.addAction(authorizeAction)
         passwordAlert.addAction(cancelAction)
-        self.presentViewController(passwordAlert, animated: true, completion: nil)
+        presentViewController(passwordAlert, animated: true, completion: nil)
     }
 
-    @objc private func refresh(sender: UIRefreshControl) {
-        self.results.removeAll()
-        self.fetchResults()
-        sender.endRefreshing()
+    @objc private func loadDashboard() {
+        results.removeAll()
+        fetchResults(true)
     }
 
     private func groupByPlan(array: [Result]) -> [String:[Result]] {
@@ -143,10 +143,17 @@ class DashboardViewController: UITableViewController, UISearchResultsUpdating {
         return dictionary
     }
 
-    private func fetchResults() {
-        self.client?.result(self.page) {
+    private func fetchResults(refresh: Bool = false) {
+        if refresh {
+            refreshControl?.beginRefreshing()
+        }
+        client?.result(page) {
             (error, page) -> Void in
             dispatch_async(dispatch_get_main_queue()) {
+                [unowned self] in
+                if (refresh) {
+                    self.refreshControl?.endRefreshing()
+                }
                 if let error = error {
                     self.alert(error)
                 } else if let page = page {
@@ -158,35 +165,35 @@ class DashboardViewController: UITableViewController, UISearchResultsUpdating {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.row < self.results.count {
-            let result = self.isSeachActive ? self.items[indexPath.row] : self.results[indexPath.row]
-            let cell = self.tableView.dequeueReusableCellWithIdentifier("cell")!
+        if indexPath.row < results.count {
+            let result = isSeachActive ? items[indexPath.row] : results[indexPath.row]
+            let cell = tableView.dequeueReusableCellWithIdentifier("cell")!
             cell.textLabel?.text = result.plan.shortName
             cell.detailTextLabel?.text = result.key
             cell.imageView?.image = UIImage(named: result.state.rawValue)
             return cell
         } else {
-            return self.tableView.dequeueReusableCellWithIdentifier("extra")!
+            return tableView.dequeueReusableCellWithIdentifier("extra")!
         }
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.isSeachActive ? self.items.count : (self.page != nil && self.page!.hasMore) ? self.results.count + 1 : self.results.count
+        return isSeachActive ? items.count : (page != nil && page!.hasMore) ? results.count + 1 : results.count
     }
 
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if cell.reuseIdentifier == "extra" {
-            self.fetchResults()
+            fetchResults()
         }
     }
 
     @objc internal func updateSearchResultsForSearchController(searchController: UISearchController) {
-        self.items = self.results.filter {
+        items = results.filter {
             $0.plan.name.lowercaseString.containsString(searchController.searchBar.text!.lowercaseString)
         }
     }
     
     deinit {
-        self.searchController.view.removeFromSuperview()
+        searchController.view.removeFromSuperview()
     }
 }
