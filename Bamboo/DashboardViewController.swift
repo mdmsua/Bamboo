@@ -62,7 +62,7 @@ class DashboardViewController: UITableViewController, UISearchResultsUpdating {
         definesPresentationContext = true
         server = repository.get()
         if let server = server {
-            title = server.name
+            navigationController?.title = server.name
             client = BambooClient(NSURL(string: (server.location))!, username: server.username, password: server.password)
             if server.biometrics {
                 if biometrics.enabled {
