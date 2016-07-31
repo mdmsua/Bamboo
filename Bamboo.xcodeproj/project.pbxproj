@@ -9,26 +9,58 @@
 /* Begin PBXBuildFile section */
 		140F8DF51CE2937E00B0CBCE /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140F8DF41CE2937E00B0CBCE /* Plan.swift */; };
 		140F8DF71CE2948200B0CBCE /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140F8DF61CE2948200B0CBCE /* Result.swift */; };
+		146B8D591D1E707A00451F0B /* BambooUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146B8D581D1E707A00451F0B /* BambooUITests.swift */; };
 		147802B01CDFB5AD00F34796 /* BambooClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147802AF1CDFB5AD00F34796 /* BambooClient.swift */; };
 		147802B51CDFB74600F34796 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147802B41CDFB74600F34796 /* Info.swift */; };
 		147802B71CDFE49500F34796 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147802B61CDFE49500F34796 /* UIViewControllerExtensions.swift */; };
+		148E68071D294649001F417D /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 148E68061D294649001F417D /* LocalAuthentication.framework */; };
+		148E680A1D2950A6001F417D /* Biometrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148E68091D2950A6001F417D /* Biometrics.swift */; };
 		14988B991CDD3C0F00E34D39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14988B981CDD3C0F00E34D39 /* AppDelegate.swift */; };
 		14988B9B1CDD3C0F00E34D39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14988B9A1CDD3C0F00E34D39 /* ViewController.swift */; };
 		14988B9E1CDD3C0F00E34D39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14988B9C1CDD3C0F00E34D39 /* Main.storyboard */; };
 		14988BA01CDD3C0F00E34D39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14988B9F1CDD3C0F00E34D39 /* Assets.xcassets */; };
 		14988BA31CDD3C0F00E34D39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14988BA11CDD3C0F00E34D39 /* LaunchScreen.storyboard */; };
 		14988BAB1CDD465A00E34D39 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14988BAA1CDD465A00E34D39 /* Server.swift */; };
+		14BBC3FC1D19734500AAD7FB /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BBC3FB1D19734500AAD7FB /* Page.swift */; };
+		14BBC40C1D19923000AAD7FB /* PageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BBC40B1D19923000AAD7FB /* PageTests.swift */; };
+		14BBC40D1D1992D200AAD7FB /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BBC3FB1D19734500AAD7FB /* Page.swift */; };
+		14BBC40E1D1992DB00AAD7FB /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140F8DF61CE2948200B0CBCE /* Result.swift */; };
+		14BBC4111D1996FC00AAD7FB /* Parsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BBC4101D1996FC00AAD7FB /* Parsable.swift */; };
+		14BBC4121D1996FC00AAD7FB /* Parsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BBC4101D1996FC00AAD7FB /* Parsable.swift */; };
+		14BBC4141D19992200AAD7FB /* Plan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140F8DF41CE2937E00B0CBCE /* Plan.swift */; };
 		14CB363B1CE1152C00703E22 /* ServerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CB363A1CE1152C00703E22 /* ServerRepository.swift */; };
 		14CB363D1CE1357A00703E22 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CB363C1CE1357A00703E22 /* DashboardViewController.swift */; };
 		14DA193D1CDDEC6B0008F4B3 /* ServerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DA193C1CDDEC6B0008F4B3 /* ServerViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		146B8D5B1D1E707A00451F0B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 14988B8D1CDD3C0F00E34D39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 14988B941CDD3C0F00E34D39;
+			remoteInfo = Bamboo;
+		};
+		14BBC4061D19921800AAD7FB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 14988B8D1CDD3C0F00E34D39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 14988B941CDD3C0F00E34D39;
+			remoteInfo = Bamboo;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		140F8DF41CE2937E00B0CBCE /* Plan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plan.swift; sourceTree = "<group>"; };
 		140F8DF61CE2948200B0CBCE /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		146B8D561D1E707A00451F0B /* BambooUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BambooUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		146B8D581D1E707A00451F0B /* BambooUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BambooUITests.swift; sourceTree = "<group>"; };
+		146B8D5A1D1E707A00451F0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		147802AF1CDFB5AD00F34796 /* BambooClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BambooClient.swift; sourceTree = "<group>"; };
 		147802B41CDFB74600F34796 /* Info.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		147802B61CDFE49500F34796 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
+		148E68061D294649001F417D /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		148E68091D2950A6001F417D /* Biometrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Biometrics.swift; path = Bamboo/Biometrics.swift; sourceTree = "<group>"; };
 		14988B951CDD3C0F00E34D39 /* Bamboo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bamboo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14988B981CDD3C0F00E34D39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14988B9A1CDD3C0F00E34D39 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -37,16 +69,37 @@
 		14988BA21CDD3C0F00E34D39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		14988BA41CDD3C0F00E34D39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14988BAA1CDD465A00E34D39 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		14BBC3FB1D19734500AAD7FB /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		14BBC4011D19921800AAD7FB /* BambooTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BambooTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		14BBC4051D19921800AAD7FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14BBC40B1D19923000AAD7FB /* PageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageTests.swift; sourceTree = "<group>"; };
+		14BBC4101D1996FC00AAD7FB /* Parsable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parsable.swift; sourceTree = "<group>"; };
 		14CB363A1CE1152C00703E22 /* ServerRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerRepository.swift; sourceTree = "<group>"; };
 		14CB363C1CE1357A00703E22 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		14DA193C1CDDEC6B0008F4B3 /* ServerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerViewController.swift; sourceTree = "<group>"; };
+		14F9A58C1D4C945E00E61D28 /* Bamboo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Bamboo.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		146B8D531D1E707A00451F0B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		14988B921CDD3C0F00E34D39 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14BBC3FE1D19921800AAD7FB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				148E68071D294649001F417D /* LocalAuthentication.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +113,7 @@
 				14988BAA1CDD465A00E34D39 /* Server.swift */,
 				140F8DF41CE2937E00B0CBCE /* Plan.swift */,
 				140F8DF61CE2948200B0CBCE /* Result.swift */,
+				14BBC3FB1D19734500AAD7FB /* Page.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -93,6 +147,15 @@
 			name = Repositories;
 			sourceTree = "<group>";
 		};
+		146B8D571D1E707A00451F0B /* BambooUITests */ = {
+			isa = PBXGroup;
+			children = (
+				146B8D581D1E707A00451F0B /* BambooUITests.swift */,
+				146B8D5A1D1E707A00451F0B /* Info.plist */,
+			);
+			path = BambooUITests;
+			sourceTree = "<group>";
+		};
 		1474E02D1CEA080900FDE1D5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,10 +163,22 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		148E68081D29508E001F417D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				148E68091D2950A6001F417D /* Biometrics.swift */,
+			);
+			name = Helpers;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		14988B8C1CDD3C0F00E34D39 = {
 			isa = PBXGroup;
 			children = (
+				148E68061D294649001F417D /* LocalAuthentication.framework */,
 				14988B971CDD3C0F00E34D39 /* Bamboo */,
+				14BBC4021D19921800AAD7FB /* BambooTests */,
+				146B8D571D1E707A00451F0B /* BambooUITests */,
 				14988B961CDD3C0F00E34D39 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,6 +187,8 @@
 			isa = PBXGroup;
 			children = (
 				14988B951CDD3C0F00E34D39 /* Bamboo.app */,
+				14BBC4011D19921800AAD7FB /* BambooTests.xctest */,
+				146B8D561D1E707A00451F0B /* BambooUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -119,6 +196,9 @@
 		14988B971CDD3C0F00E34D39 /* Bamboo */ = {
 			isa = PBXGroup;
 			children = (
+				14F9A58C1D4C945E00E61D28 /* Bamboo.entitlements */,
+				148E68081D29508E001F417D /* Helpers */,
+				14BBC40F1D1996C200AAD7FB /* Protocols */,
 				1474E02D1CEA080900FDE1D5 /* Extensions */,
 				144F523D1CE3BFD5007B1652 /* Repositories */,
 				144F523C1CE3BFB1007B1652 /* Controllers */,
@@ -131,9 +211,44 @@
 			path = Bamboo;
 			sourceTree = "<group>";
 		};
+		14BBC4021D19921800AAD7FB /* BambooTests */ = {
+			isa = PBXGroup;
+			children = (
+				14BBC4051D19921800AAD7FB /* Info.plist */,
+				14BBC40B1D19923000AAD7FB /* PageTests.swift */,
+			);
+			path = BambooTests;
+			sourceTree = "<group>";
+		};
+		14BBC40F1D1996C200AAD7FB /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				14BBC4101D1996FC00AAD7FB /* Parsable.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		146B8D551D1E707A00451F0B /* BambooUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 146B8D5F1D1E707A00451F0B /* Build configuration list for PBXNativeTarget "BambooUITests" */;
+			buildPhases = (
+				146B8D521D1E707A00451F0B /* Sources */,
+				146B8D531D1E707A00451F0B /* Frameworks */,
+				146B8D541D1E707A00451F0B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				146B8D5C1D1E707A00451F0B /* PBXTargetDependency */,
+			);
+			name = BambooUITests;
+			productName = BambooUITests;
+			productReference = 146B8D561D1E707A00451F0B /* BambooUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		14988B941CDD3C0F00E34D39 /* Bamboo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14988BA71CDD3C0F00E34D39 /* Build configuration list for PBXNativeTarget "Bamboo" */;
@@ -151,6 +266,24 @@
 			productReference = 14988B951CDD3C0F00E34D39 /* Bamboo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		14BBC4001D19921800AAD7FB /* BambooTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14BBC4081D19921800AAD7FB /* Build configuration list for PBXNativeTarget "BambooTests" */;
+			buildPhases = (
+				14BBC3FD1D19921800AAD7FB /* Sources */,
+				14BBC3FE1D19921800AAD7FB /* Frameworks */,
+				14BBC3FF1D19921800AAD7FB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				14BBC4071D19921800AAD7FB /* PBXTargetDependency */,
+			);
+			name = BambooTests;
+			productName = BambooTests;
+			productReference = 14BBC4011D19921800AAD7FB /* BambooTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -158,12 +291,28 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Dmytro Morozov";
 				TargetAttributes = {
+					146B8D551D1E707A00451F0B = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 14988B941CDD3C0F00E34D39;
+					};
 					14988B941CDD3C0F00E34D39 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 56468X2PU5;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
+					};
+					14BBC4001D19921800AAD7FB = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 56468X2PU5;
+						DevelopmentTeamName = "Dmytro Morozov";
+						ProvisioningStyle = Automatic;
+						TestTargetID = 14988B941CDD3C0F00E34D39;
 					};
 				};
 			};
@@ -181,11 +330,20 @@
 			projectRoot = "";
 			targets = (
 				14988B941CDD3C0F00E34D39 /* Bamboo */,
+				14BBC4001D19921800AAD7FB /* BambooTests */,
+				146B8D551D1E707A00451F0B /* BambooUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		146B8D541D1E707A00451F0B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		14988B931CDD3C0F00E34D39 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -196,19 +354,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		14BBC3FF1D19921800AAD7FB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		146B8D521D1E707A00451F0B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				146B8D591D1E707A00451F0B /* BambooUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		14988B911CDD3C0F00E34D39 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				148E680A1D2950A6001F417D /* Biometrics.swift in Sources */,
 				14CB363B1CE1152C00703E22 /* ServerRepository.swift in Sources */,
 				14988B9B1CDD3C0F00E34D39 /* ViewController.swift in Sources */,
+				14BBC3FC1D19734500AAD7FB /* Page.swift in Sources */,
 				14988BAB1CDD465A00E34D39 /* Server.swift in Sources */,
 				14988B991CDD3C0F00E34D39 /* AppDelegate.swift in Sources */,
 				147802B51CDFB74600F34796 /* Info.swift in Sources */,
 				14CB363D1CE1357A00703E22 /* DashboardViewController.swift in Sources */,
+				14BBC4111D1996FC00AAD7FB /* Parsable.swift in Sources */,
 				140F8DF51CE2937E00B0CBCE /* Plan.swift in Sources */,
 				147802B01CDFB5AD00F34796 /* BambooClient.swift in Sources */,
 				14DA193D1CDDEC6B0008F4B3 /* ServerViewController.swift in Sources */,
@@ -217,7 +393,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		14BBC3FD1D19921800AAD7FB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14BBC4121D1996FC00AAD7FB /* Parsable.swift in Sources */,
+				14BBC40C1D19923000AAD7FB /* PageTests.swift in Sources */,
+				14BBC4141D19992200AAD7FB /* Plan.swift in Sources */,
+				14BBC40E1D1992DB00AAD7FB /* Result.swift in Sources */,
+				14BBC40D1D1992D200AAD7FB /* Page.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		146B8D5C1D1E707A00451F0B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 14988B941CDD3C0F00E34D39 /* Bamboo */;
+			targetProxy = 146B8D5B1D1E707A00451F0B /* PBXContainerItemProxy */;
+		};
+		14BBC4071D19921800AAD7FB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 14988B941CDD3C0F00E34D39 /* Bamboo */;
+			targetProxy = 14BBC4061D19921800AAD7FB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		14988B9C1CDD3C0F00E34D39 /* Main.storyboard */ = {
@@ -239,6 +440,28 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		146B8D5D1D1E707A00451F0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = BambooUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mdmsua.BambooUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Bamboo;
+			};
+			name = Debug;
+		};
+		146B8D5E1D1E707A00451F0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = BambooUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mdmsua.BambooUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Bamboo;
+			};
+			name = Release;
+		};
 		14988BA51CDD3C0F00E34D39 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -281,6 +504,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -318,6 +542,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 2.3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -326,8 +551,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Bamboo/Bamboo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Bamboo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mdmsua.Bamboo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -338,17 +565,61 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Bamboo/Bamboo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Bamboo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mdmsua.Bamboo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+			};
+			name = Release;
+		};
+		14BBC4091D19921800AAD7FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				INFOPLIST_FILE = BambooTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mdmsua.BambooTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 2.3;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bamboo.app/Bamboo";
+			};
+			name = Debug;
+		};
+		14BBC40A1D19921800AAD7FB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				INFOPLIST_FILE = BambooTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mdmsua.BambooTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bamboo.app/Bamboo";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		146B8D5F1D1E707A00451F0B /* Build configuration list for PBXNativeTarget "BambooUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				146B8D5D1D1E707A00451F0B /* Debug */,
+				146B8D5E1D1E707A00451F0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		14988B901CDD3C0F00E34D39 /* Build configuration list for PBXProject "Bamboo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -363,6 +634,15 @@
 			buildConfigurations = (
 				14988BA81CDD3C0F00E34D39 /* Debug */,
 				14988BA91CDD3C0F00E34D39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14BBC4081D19921800AAD7FB /* Build configuration list for PBXNativeTarget "BambooTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14BBC4091D19921800AAD7FB /* Debug */,
+				14BBC40A1D19921800AAD7FB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -12,7 +12,7 @@ class ServerViewController: UITableViewController {
     
     private let repository = ServerRepository()
     
-    @IBOutlet private weak var doneButton: UIButton!
+    @IBOutlet private weak var saveBarButtonItem: UIBarButtonItem!
     
     @IBOutlet private weak var nameTextField: UITextField!
     
@@ -22,35 +22,54 @@ class ServerViewController: UITableViewController {
     
     @IBOutlet private weak var passwordTextField: UITextField!
     
+    @IBOutlet private weak var biometricsSwitch: UISwitch!
+    
     @IBAction private func textFieldEditingChanged() {
-        doneButton.enabled =
-            self.nameTextField.text?.characters.count > 0 &&
-            self.locationTextField.text?.characters.count > 0 &&
-            self.usernameTextField.text?.characters.count > 0 &&
-            self.passwordTextField.text?.characters.count > 0
+        saveBarButtonItem.enabled =
+            !nameTextField.text!.isEmpty &&
+            !locationTextField.text!.isEmpty &&
+            !usernameTextField.text!.isEmpty &&
+            !passwordTextField.text!.isEmpty
     }
 
-    @IBAction private func doneButtonClicked(sender: AnyObject) {
-        let name = self.nameTextField.text!
-        let location = self.locationTextField.text!
-        let username = self.usernameTextField.text!
-        let password = self.passwordTextField.text!
+    @IBAction private func saveBarButtonItemClicked(sender: AnyObject) {
+        let name = nameTextField.text!
+        let location = locationTextField.text!
+        let username = usernameTextField.text!
+        let password = passwordTextField.text!
         let url = NSURL(string: location)!
         let client = BambooClient(url, username: username, password: password)
-        let overlay = self.presentActivityIndicatorOverlay()
+        let overlay = presentActivityIndicatorOverlay()
         client.info() {
             (error, info) -> Void in
             dispatch_async(dispatch_get_main_queue()) {
+                [unowned self] in
                 overlay.removeFromSuperview()
                 if let error = error {
                     self.alert(error)
                 } else if let _ = info {
-                    let server = Server(name: name, location: location, username: username, password: password)
-                    self.repository.add(server)
-                    self.navigationController?.popViewControllerAnimated(true)
+                    let server = Server(name: name, location: location, username: username, password: password, biometrics: self.biometricsSwitch.on)
+                    self.repository.update(server)
+                    self.dismissViewControllerAnimated(true, completion: nil)
                 }
             }
             
+        }
+    }
+    
+    @IBAction private func cancelBarButtonItemClicked(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    internal override func viewDidLoad() {
+        super.viewDidLoad()
+        if let server = repository.get() {
+            nameTextField.text = server.name
+            locationTextField.text = server.location
+            usernameTextField.text = server.username
+            passwordTextField.text = server.password
+            biometricsSwitch.on = server.biometrics
+            textFieldEditingChanged()
         }
     }
 }

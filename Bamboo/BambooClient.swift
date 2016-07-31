@@ -28,7 +28,7 @@ class BambooClient {
         case Delete = "DELETE"
     }
     
-    private let paths: [Path: String] = [.Info: "info", .Result: "result?max-result=100"]
+    private let paths: [Path: String] = [.Info: "info", .Result: "result"]
     
     init(_ host: NSURL, username: String, password: String) {
         self.host = NSURL(string: "/rest/api/latest/", relativeToURL: host)!
@@ -36,8 +36,8 @@ class BambooClient {
         self.password = password
     }
     
-    private func createRequest(verb: Verb, path: String) -> NSMutableURLRequest {
-        let url = NSURL(string: path, relativeToURL: self.host)
+    private func createRequest(verb: Verb, path: String, query: String? = nil) -> NSMutableURLRequest {
+        let url = NSURL(string: query == nil ? path : "\(path)?\(query!)", relativeToURL: self.host)
         let request = NSMutableURLRequest(URL: url!)
         let login = NSString(format: "%@:%@", self.username, self.password)
         let loginData: NSData = login.dataUsingEncoding(NSUTF8StringEncoding)!
@@ -48,15 +48,16 @@ class BambooClient {
         return request
     }
     
-    private func executeRequest(request: NSMutableURLRequest, handler: (error: NSError?, data: [NSObject: AnyObject]?) -> Void) {
-        let session = NSURLSession.sharedSession()
-        session.dataTaskWithRequest(request, completionHandler: {
+    private func executeRequest(request: NSMutableURLRequest, handler: (error: NSError?, data: [String: AnyObject]?) -> Void) {
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration.timeoutIntervalForRequest = 10
+        NSURLSession(configuration: configuration).dataTaskWithRequest(request, completionHandler: {
             (data, response, error) -> Void in
             if error == nil {
                 let response = response as! NSHTTPURLResponse
                 if response.statusCode == 200 {
                     do {
-                        let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! [NSObject: AnyObject]
+                        let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! [String: AnyObject]
                         handler(error: nil, data: json)
                     } catch let error as NSError {
                         handler(error: error, data: nil)
@@ -87,26 +88,15 @@ class BambooClient {
         });
     }
     
-    func result(handler: (error: NSError?, results: [Result]?) -> Void) -> Void {
-        let request = self.createRequest(.Get, path: paths[.Result]!)
+    func result(page: Page<Result>?, handler: (error: NSError?, result: Page<Result>?) -> Void) -> Void {
+        let request = self.createRequest(.Get, path: paths[.Result]!, query: page?.next)
         self.executeRequest(request) {
             (error, data) -> Void in
             if let error = error {
-                handler(error: error, results: nil)
+                handler(error: error, result: nil)
             }
-            else if let data = data {
-                if data["results"] is NSObject && data["results"]!["result"] is [NSObject] {
-                    let resultsJson = data["results"]!["result"] as! [NSObject]
-                    var results = [Result]()
-                    for resultJson in resultsJson {
-                        if let itemJson = resultJson as? [NSObject: AnyObject] {
-                            if let result = Result(itemJson) {
-                                results.append(result)
-                            }
-                        }
-                    }
-                    handler(error: nil, results: results)
-                }
+            else if let data = data, let result = Page<Result>(data) {
+                handler(error: nil, result: result)
             }
         };
     }

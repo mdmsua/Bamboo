@@ -8,74 +8,196 @@
 
 import UIKit
 
-class DashboardViewController: UITableViewController {
-    
+class DashboardViewController: UITableViewController, UISearchResultsUpdating {
+
     var server: Server?
-    
+
     var client: BambooClient?
+
+    private var page: Page<Result>?
     
-    var results = [Result]()
-    
+    private var biometrics = Biometrics()
+
+    private var results: [Result] = [Result]() {
+        didSet {
+            let failed = results.filter() {
+                element -> Bool in element.state == .Failed
+            }.count
+            if failed > 0 {
+                tabBarItem.badgeValue = String(failed)
+            }
+            tableView.reloadData()
+        }
+    }
+
+    private var items: [Result] = [Result]() {
+        didSet {
+            let failed = items.filter() {
+                element -> Bool in element.state == .Failed
+            }.count
+            if failed > 0 {
+                tabBarItem.badgeValue = String(failed)
+            }
+            tableView.reloadData()
+        }
+    }
+
     private let repository = ServerRepository()
-    
+
+    private let searchController = UISearchController(searchResultsController: nil)
+
+    private var isSeachActive: Bool {
+        get {
+            return searchController.active && !(searchController.searchBar.text?.isEmpty)!
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.server = self.repository.get()
-        self.client = BambooClient(NSURL(string: (self.server?.location)!)!, username: (self.server?.username)!, password: (self.server?.password)!)
-        self.refreshControl?.addTarget(self, action: #selector(DashboardViewController.refresh(_:)), forControlEvents: .ValueChanged)
-    }
-    
-    @objc private func refresh(sender: UIRefreshControl) {
-        self.client?.result() {
-            (error, results) -> Void in
-            dispatch_async(dispatch_get_main_queue()) {
-                if let error = error {
-                    self.alert(error)
-                } else if let results = results {
-                    let failed = results.filter() { element -> Bool in element.state == .Failed }.count
-                    if failed > 0 {
-                        self.tabBarItem.badgeValue = String(failed)
+        tableView.tableHeaderView = searchController.searchBar
+        tableView.tableFooterView = UIView()
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        refreshControl?.addTarget(self, action: #selector(loadDashboard), forControlEvents: .ValueChanged)
+        definesPresentationContext = true
+        server = repository.get()
+        if let server = server {
+            navigationController?.title = server.name
+            client = BambooClient(NSURL(string: (server.location))!, username: server.username, password: server.password)
+            if server.biometrics {
+                if biometrics.enabled {
+                    biometrics.authenticate("Access \(server.name) as \(server.username)") {
+                        [unowned self] result in
+                        dispatch_async(dispatch_get_main_queue()) {
+                            if result == .Success {
+                                self.loadDashboard()
+                            } else if result == .Fallback {
+                                self.askPassword(self.server!) {
+                                    result in
+                                    if result {
+                                        self.loadDashboard()
+                                    } else {
+                                        self.navigationController?.popViewControllerAnimated(true)
+                                    }
+                                }
+                            } else {
+                                self.navigationController?.popViewControllerAnimated(true)
+                            }
+                        }
                     }
-                    self.results = results
-                    self.tableView.reloadData()
+                } else {
+                    askPassword(server) {
+                        [unowned self ]result in
+                        if result {
+                            self.loadDashboard()
+                        } else {
+                            self.navigationController?.popViewControllerAnimated(true)
+                        }
+                    }
                 }
+            } else {
+                loadDashboard()
             }
+        } else {
+            navigationController?.popViewControllerAnimated(true)
         }
-        sender.endRefreshing()
     }
-    
-    private func groupByPlan(array: [Result]) -> [String: [Result]] {
+
+    private func askPassword(server: Server, result: Bool -> Void) -> Void {
+        let passwordAlert = UIAlertController(title: "\(server.name) requires authentication", message: "Enter password for \(server.username)", preferredStyle: .Alert)
+        passwordAlert.addTextFieldWithConfigurationHandler {
+            textField -> Void in
+            textField.secureTextEntry = true
+            textField.placeholder = "Password"
+        }
+        let authorizeAction = UIAlertAction(title: "Authorize", style: .Default) {
+            _ -> Void in
+            passwordAlert.dismissViewControllerAnimated(true, completion: nil)
+            result(passwordAlert.textFields![0].text == server.password)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) {
+            _ -> Void in
+            passwordAlert.dismissViewControllerAnimated(true, completion: nil)
+            result(false)
+        }
+        passwordAlert.addAction(authorizeAction)
+        passwordAlert.addAction(cancelAction)
+        presentViewController(passwordAlert, animated: true, completion: nil)
+    }
+
+    @objc private func loadDashboard() {
+        results.removeAll()
+        fetchResults(true)
+    }
+
+    private func groupByPlan(array: [Result]) -> [String:[Result]] {
         var dictionary = [String: [Result]]()
         for element in array {
             let key = element.plan.shortName
             var array: [Result]? = dictionary[key]
-            
+
             if (array == nil) {
                 array = [Result]()
             }
-            
+
             array!.append(element)
             dictionary[key] = array!
         }
-        
+
         return dictionary
     }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        self.refresh(self.refreshControl!)
+
+    private func fetchResults(refresh: Bool = false) {
+        if refresh {
+            refreshControl?.beginRefreshing()
+        }
+        client?.result(page) {
+            (error, page) -> Void in
+            dispatch_async(dispatch_get_main_queue()) {
+                [unowned self] in
+                if (refresh) {
+                    self.refreshControl?.endRefreshing()
+                }
+                if let error = error {
+                    self.alert(error)
+                } else if let page = page {
+                    self.page = page
+                    self.results.appendContentsOf(page.results)
+                }
+            }
+        }
     }
-    
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("cell")!
-        let result = self.results[indexPath.row]
-        cell.textLabel?.text = result.plan.shortName
-        cell.detailTextLabel?.text = result.key
-        cell.imageView?.image = UIImage(named: result.state.rawValue)
-        return cell
+        if indexPath.row < results.count {
+            let result = isSeachActive ? items[indexPath.row] : results[indexPath.row]
+            let cell = tableView.dequeueReusableCellWithIdentifier("cell")!
+            cell.textLabel?.text = result.plan.shortName
+            cell.detailTextLabel?.text = result.key
+            cell.imageView?.image = UIImage(named: result.state.rawValue)
+            return cell
+        } else {
+            return tableView.dequeueReusableCellWithIdentifier("extra")!
+        }
+    }
+
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return isSeachActive ? items.count : (page != nil && page!.hasMore) ? results.count + 1 : results.count
+    }
+
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if cell.reuseIdentifier == "extra" {
+            fetchResults()
+        }
+    }
+
+    @objc internal func updateSearchResultsForSearchController(searchController: UISearchController) {
+        items = results.filter {
+            $0.plan.name.lowercaseString.containsString(searchController.searchBar.text!.lowercaseString)
+        }
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.results.count
+    deinit {
+        searchController.view.removeFromSuperview()
     }
 }
